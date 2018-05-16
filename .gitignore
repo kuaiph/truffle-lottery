@@ -1,0 +1,9 @@
+# NPM's package-lock is a nice idea but does not make sense as long as submodule versions cannot be pinned and it gets re-written on each npm install
+package-lock.json
+
+# My IDE
+.vscode
+
+# Build artifacts
+node_modules
+build

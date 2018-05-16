@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Lottery</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
+<body>
+  <h1>Smart Lottery</h1>
+  <h2>Example Truffle Dapp</h2>
+
+  <h3>Current pot value $$$$$$</h3>
+  <p><span id="potValue"></span> Wei</p>
+
+  <h3>Participants</h3>
+  <ul id="participants"></ul>
+
+  <h3>Place a bet</h3>
+  <label for="address">Your address</label><br><input type="text" placeholder="0x000..." id="address" name="address"><br>
+  <label for="password">Your password</label><br><input type="text" placeholder="234b..." id="password" name="password"><br>
+  <label for="slot">Slot to bet 1000000000000000000 Wei (== 1 Ether) on</label><br><input type="number" placeholder="0" id="slot" name="slot" step="1" min="0" max="5">
+  <button id="bet">BET</button>
+</body>
+</html>
