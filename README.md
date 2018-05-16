@@ -12,4 +12,4 @@ This is a **D**istributed lottery [truffle](https://github.com/trufflesuite/truf
 
 ### Tests
 
-## How to: Test, deploy and run
+## [How to] Test, deploy and run
