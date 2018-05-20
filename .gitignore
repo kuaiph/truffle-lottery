@@ -7,3 +7,6 @@ package-lock.json
 # Build artifacts
 node_modules
 build
+
+# Local config
+config/local.*

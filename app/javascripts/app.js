@@ -7,16 +7,24 @@ const SmartLottery = contract(smartLotteryArtifact)
 
 const App = {
   start: () => {
+    web3.eth.getAccounts((err, accounts) => {
+      if (err) {
+        console.error(err)
+      }
+
+      App.account = accounts[0]
+    })
+
     SmartLottery.setProvider(web3.currentProvider)
 
     SmartLottery
-            .deployed()
-            .then(instance => Promise.all([instance.getParticipants(), instance.getPotValue()]))
-            .then(([participants, potValue]) => {
-              App.printParticipants(participants)
-              App.printPotValue(potValue)
-            })
-            .then(() => App.listenOnUserInput())
+      .deployed()
+      .then(instance => Promise.all([instance.getParticipants(), instance.getPotValue()]))
+      .then(([participants, potValue]) => {
+        App.printParticipants(participants)
+        App.printPotValue(potValue)
+      })
+      .then(() => App.listenOnUserInput())
   },
 
   printParticipants: participants => {
@@ -31,29 +39,29 @@ const App = {
   listenOnUserInput: () => {
     document.getElementById('bet').onclick = () => {
       const slot = document.getElementById('slot').value
-      const address = document.getElementById('address').value
-      const password = document.getElementById('password').value
-      App.placeABet(slot, address, password)
+      App.placeABet(slot)
+    }
+
+    document.getElementById('reload').onclick = () => {
+      SmartLottery
+        .deployed()
+        .then(instance => instance.getParticipants())
+        .then(participants => App.printParticipants(participants))
     }
   },
 
-  placeABet: (slot, address, password) => {
-    const oneMinute = 1000 * 60
-    window.web3.personal.unlockAccount(address, password, oneMinute)
-
+  placeABet: (slot) => {
     SmartLottery
-            .deployed()
-            .then(instance => {
-              instance.bet(slot, { from: address, value: 1000000000000000000, gas: 4712388 })
-              return instance
-            })
-            .then(instance => instance.getParticipants())
-            .then(participants => App.printParticipants(participants))
+      .deployed()
+      .then(instance => {
+        instance.bet(slot, { from: App.account, value: 1000000000000000000, gas: 4712388 })
+        return instance
+      })
   }
 }
 
 window.addEventListener('load', () => {
-  window.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:9545'))
+  window.web3 = new Web3(web3.currentProvider)
 
   App.start()
 })
