@@ -29,6 +29,7 @@ Use the pre-network `rinkeby` if you want to deploy to Etherium's testnetwork ri
 ### Run
 
 Run the development setup of this application by simply typing `npm run dev` and open [http://localhost:8080](http://localhost:8080) in your local browser.
+**Hint**: Open your browser's JS console to see debug and error messages.
 
 ## Components
 
